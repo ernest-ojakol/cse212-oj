@@ -12,8 +12,17 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+        //Initiate array with length passed in the header
+        double[] multiples = new double[length];
 
-        return []; // replace this return statement with your own
+        //populate multiples array with multiples
+        for (var i = 1; i <= length; i++)
+        {
+            multiples[i - 1] = number * i;
+        }
+
+        //return multiples array
+        return multiples; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +38,37 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Optimize amount using modulo
+        // Since rotating by data.Count returns the original list, reduce amount
+        amount = amount % data.Count;
+
+        // If amount equals data.Count after modulo, the list is unchanged
+        if (amount == 0)
+        {
+            return;
+        }
+
+        //Helper function to reverse a portion of the list from start to end
+        void Reverse(int start, int end)
+        {
+            while (start < end)
+            {
+                // Swap elements at start and end
+                int temp = data[start];
+                data[start] = data[end];
+                data[end] = temp;
+                start++;
+                end--;
+            }
+        }
+
+        // Perform the rotation using three reversals
+        // Reverse the entire list
+        Reverse(0, data.Count - 1);
+        // Reverse the first 'amount' elements
+        Reverse(0, amount - 1);
+        // Reverse the remaining elements
+        Reverse(amount, data.Count - 1);
     }
 }
