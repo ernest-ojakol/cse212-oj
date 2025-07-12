@@ -13,7 +13,9 @@ public class PersonQueue
     /// <param name="person">The person to add</param>
     public void Enqueue(Person person)
     {
-        _queue.Insert(0, person);
+        //Has it behaving as a LIFO and thus was changed
+        //_queue.Insert(0, person);
+        _queue.Add(person);
     }
 
     public Person Dequeue()
