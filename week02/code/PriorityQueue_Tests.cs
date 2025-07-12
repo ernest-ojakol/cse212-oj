@@ -8,7 +8,7 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: Enqueue multiple items with different priorities and dequeue them
     // Expected Result: Items are dequeued in order of highest priority (B, C, A)
-    // Defect(s) Found: Dequeue loop skipped the last item (index < Count - 1), missing potential highest priority. Item was not removed from queue, causing persistence. Incorrect FIFO handling for ties due to '>=', selecting later items.
+    // Defect(s) Found: Dequeue loop skipped the last item, missing potential highest priority.
     public void TestPriorityQueue_EnqueueDequeueDifferentPriorities()
     {
         var priorityQueue = new PriorityQueue();
@@ -24,7 +24,7 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: Enqueue multiple items with the same priority and dequeue them
     // Expected Result: Items with same priority are dequeued in FIFO order (A, B, C)
-    // Defect(s) Found: Dequeue used '>=', selecting the last item with highest priority instead of the first (violating FIFO). Item was not removed from queue. Loop skipped last item.
+    // Defect(s) Found: Dequeue used '>=', selecting the last item with highest priority instead of the first (violating FIFO).
     public void TestPriorityQueue_SamePriorityFIFO()
     {
         var priorityQueue = new PriorityQueue();
@@ -70,7 +70,7 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: Enqueue items with mixed priorities, including negative, and dequeue
     // Expected Result: Items are dequeued by highest priority, FIFO for ties (B, C, D, A)
-    // Defect(s) Found: Dequeue used '>=', selecting C over B for priority 5 (violating FIFO). Loop skipped last item. Item was not removed from queue.
+    // Defect(s) Found: Dequeue used '>=', selecting C over B for priority 5 (violating FIFO).
     public void TestPriorityQueue_NegativeAndMixedPriorities()
     {
         var priorityQueue = new PriorityQueue();
