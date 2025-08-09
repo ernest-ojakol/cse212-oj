@@ -11,7 +11,9 @@ public class Node
 
     public void Insert(int value)
     {
-        // TODO Start Problem 1
+        // Skip if value already exists (ensuring unique values)
+        if (value == Data)
+            return;
 
         if (value < Data)
         {
@@ -33,13 +35,41 @@ public class Node
 
     public bool Contains(int value)
     {
-        // TODO Start Problem 2
-        return false;
+        // Check if current node's data matches the value
+        if (value == Data)
+            return true;
+
+        // Search left subtree if value is less than current node's data
+        if (value < Data)
+        {
+            if (Left is null)
+                return false;
+            return Left.Contains(value);
+        }
+        // Search right subtree if value is greater than or equal to current node's data
+        else
+        {
+            if (Right is null)
+                return false;
+            return Right.Contains(value);
+        }
     }
 
     public int GetHeight()
     {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        // Initialize heights of left and right subtrees
+        int leftHeight = 0;
+        int rightHeight = 0;
+
+        // Recursively get the height of the left subtree if it exists
+        if (Left is not null)
+            leftHeight = Left.GetHeight();
+
+        // Recursively get the height of the right subtree if it exists
+        if (Right is not null)
+            rightHeight = Right.GetHeight();
+
+        // Return 1 plus the maximum height of the left or right subtree
+        return 1 + Math.Max(leftHeight, rightHeight);
     }
 }
